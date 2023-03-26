@@ -64,15 +64,20 @@ public class SymptomHandler implements ISymptomHandler{
 			}	
 		}
 	}
+	
 	@Override
 	public void CreateSortedFile(String path) throws IOException {
-		result = new File(path);
-		result.createNewFile();
-		FileWriter writer = new FileWriter(path);
-		for(int i = 0 ; i < listKey.size() ; i++) {		
-			writer.write(listKey.get(i)+" : " + dico.get(listKey.get(i)) + "\n");
+		try {
+			result = new File(path);
+			result.createNewFile();
+			FileWriter writer = new FileWriter(path);
+			for(int i = 0 ; i < listKey.size() ; i++) {		
+				writer.write(listKey.get(i)+" : " + dico.get(listKey.get(i)) + "\n");
+			}
+			writer.close();		
+		}catch(Exception e) {
+			System.out.println(e);
 		}
-		writer.close();		
 	}
 
 }

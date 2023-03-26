@@ -1,6 +1,7 @@
 package com.hemebiotech.analytics;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 	}
 	
 	@Override
-	public List<String> GetSymptoms() {
+	public List<String> GetSymptoms() throws IOException, IncorrectFileNameException{
 		ArrayList<String> result = new ArrayList<String>();
 		
 		if (filepath != null) {
@@ -36,8 +37,8 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 					line = reader.readLine();
 				}
 				reader.close();
-			} catch (IOException e) {
-				e.printStackTrace();
+			} catch (FileNotFoundException e) {
+				throw new IncorrectFileNameException("file path :"+this.filepath+" is incorrect");
 			}
 		}
 		
